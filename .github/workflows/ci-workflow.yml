@@ -95,3 +95,19 @@ jobs:
           name: 'Test Report: JUnit'
           path: ./test-artifacts/test-results/challenge-*/test/*.xml
           reporter: java-junit
+
+  Test-Coverage-Reporter:
+    needs: Challenges
+    if: success() || failure()
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Test & publish code coverage
+        uses: paambaati/codeclimate-action@v5.0.0
+        env:
+          # Set CC_TEST_REPORTER_ID as secret of your repo
+          CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
+          JACOCO_SOURCE_PATH: "${{github.workspace}}/src/main/kotlin"
+        with:
+          # The report file must be there, otherwise Code Climate won't find it
+          coverageCommand: make test-coverage
+          coverageLocations: ${{github.workspace}}/build/reports/jacoco/test/jacocoTestReport.xml:jacoco
