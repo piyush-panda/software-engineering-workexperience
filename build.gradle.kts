@@ -54,6 +54,8 @@ plugins {
 
 dependencies {
     implementation(libs.kotlin.stdlib)
+    implementation(rootProject.libs.graalvm.js)
+    implementation(rootProject.libs.graalvm.js.scriptengine)
     testImplementation(rootProject.libs.junit.jupiter)
     testImplementation(rootProject.libs.kotest.assertions.core)
     testImplementation(rootProject.libs.kotest.runner.junit5)
