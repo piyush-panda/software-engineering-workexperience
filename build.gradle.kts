@@ -31,6 +31,7 @@ plugins {
     `java-library`
     alias(libs.plugins.jetbrains.kotlin.jvm)
     alias(libs.plugins.adarshr.test.logger)
+    jacoco
 }
 
 dependencies {
@@ -63,6 +64,13 @@ tasks {
         useJUnitPlatform()
         testLogging { showStandardStreams = true }
         systemProperty(inverseMatcherFlag, System.getProperty(inverseMatcherFlag, "false"))
+    }
+
+    named<JacocoReport>("jacocoTestReport") {
+        reports {
+            xml.required.set(true)
+            csv.required.set(false)
+        }
     }
 
     wrapper {
