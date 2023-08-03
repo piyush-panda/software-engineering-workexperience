@@ -2,7 +2,7 @@ package io.github.u.ways
 
 import io.github.u.ways.domain.Request
 
-fun challenge1(request: Request) {
+fun challenge1(request: Request, response: String) {
     println(
         """
             I've received the following request: 
